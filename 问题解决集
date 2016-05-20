@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>   
+<meta charset="UTF-8">
+<title>由表格引发的对于弹性布局的使用</title>
+<style type="text/css">
+    /*表格倒转*/
+    .rtable {
+        display: inline-block;
+        vertical-align: top;
+        max-width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+    .rtable, .rtable--flip tbody {
+        background: -webkit-radial-gradient(left ellipse, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 75%) 0 center, -webkit-radial-gradient(right ellipse, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 75%) 100% center;
+        background: radial-gradient(ellipse at left, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 75%) 0 center, radial-gradient(ellipse at right, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 75%) 100% center;
+        background-size: 10px 100%, 10px 100%;
+        background-attachment: scroll, scroll;
+        background-repeat: no-repeat;
+        line-height: 20px;
+        -webkit-overflow-scrolling: touch;
+    }
+    .rtable td:first-child, .rtable--flip tbody tr:first-child {
+        background-image: -webkit-linear-gradient(left, white 50%, rgba(255, 255, 255, 0) 100%);
+        background-image: linear-gradient(to right, white 50%, rgba(255, 255, 255, 0) 100%);
+        background-repeat: no-repeat;
+        background-size: 20px 100%;
+    }
+    .rtable td:last-child, .rtable--flip tbody tr:last-child {
+        background-image: -webkit-linear-gradient(right, white 50%, rgba(255, 255, 255, 0) 100%);
+        background-image: linear-gradient(to left, white 50%, rgba(255, 255, 255, 0) 100%);
+        background-repeat: no-repeat;
+        background-position: 100% 0;
+        background-size: 20px 100%;
+    }
+    .rtable th {
+        font-size: 11px;
+        text-align: left;
+        text-transform: uppercase;
+        background: #f2f0e6;
+    }
+    .rtable th, .rtable td {
+        padding: 6px 12px;
+        border: 1px solid #d9d7ce;
+    }
+    .rtable--flip {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        overflow: hidden;
+        background: none;
+    }
+    .rtable--flip thead {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-shrink: 0;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        min-width: -webkit-min-content;
+        min-width: -moz-min-content;
+        min-width: min-content;
+    }
+    .rtable--flip tbody {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        position: relative;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+    .rtable--flip tr {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: -webkit-min-content;
+        min-width: -moz-min-content;
+        min-width: min-content;
+        -webkit-flex-shrink: 0;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+    }
+    .rtable--flip td, .rtable--flip th {
+        display: block;
+    }
+    .rtable--flip td {
+        background-image: none !important;
+        border-left: 0;
+    }
+    .rtable--flip th:not(:last-child), .rtable--flip td:not(:last-child) {
+        border-bottom: 0;
+    }
+</style>     
+<h1>CSS only Responsive Tables</h1>
+<table class="rtable">
+    <thead>
+        <tr>
+            <th>Browser</th>
+            <th>Sessions</th>
+            <th>Percentage
+            </th><th>New Users</th>
+            <th>Avg. Duration</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Chrome</td>
+            <td>9,562</td>
+            <td>68.81%</td>
+            <td>7,895</td>
+            <td>01:07</td>
+        </tr>
+        <tr>
+            <td>Firefox</td>
+            <td>2,403</td>
+            <td>17.29%</td>
+            <td>2,046</td>
+            <td>00:59</td>
+        </tr>
+        <tr>
+            <td>Safari</td>
+            <td>1,089</td>
+            <td>2.63%</td>
+            <td>904</td>
+            <td>00:59</td>
+        </tr>
+        <tr>
+            <td>Internet Explorer</td>
+            <td>366</td>
+            <td>2.63%</td>
+            <td>333</td>
+            <td>01:01</td>
+        </tr>
+        <tr>
+            <td>Safari (in-app)</td>
+            <td>162</td>
+            <td>1.17%</td>
+            <td>112</td>
+            <td>00:58</td>
+        </tr>
+        <tr>
+            <td>Opera</td>
+            <td>103</td>
+            <td>0.74%</td>
+            <td>87</td>
+            <td>01:22</td>
+        </tr>
+        <tr>
+            <td>Edge</td>
+            <td>98</td>
+            <td>0.71%</td>
+            <td>69</td>
+            <td>01:18</td>
+        </tr>
+        <tr>
+            <td>Other</td>
+            <td>275</td>
+            <td>6.02%</td>
+            <td>90</td>
+            <td>N/A</td>
+        </tr>
+    </tbody>
+</table>
+<h2>-----------------------------------------------</h2>
+<h2>-----------------------------------------------</h2>
+<table class="rtable rtable--flip">
+    <thead>
+        <tr>
+            <th>Browser</th>
+            <th>Sessions</th>
+            <th>Percentage</th>
+            <th>New Users</th>
+            <th>Avg. Duration</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Chrome</td>
+            <td>9,562</td>
+            <td>68.81%</td>
+            <td>7,895</td>
+            <td>01:07</td>
+        </tr>
+        <tr>
+            <td>Firefox</td>
+            <td>2,403</td>
+            <td>17.29%</td>
+            <td>2,046</td>
+            <td>00:59</td>
+        </tr>
+        <tr>
+            <td>Safari</td>
+            <td>1,089</td>
+            <td>2.63%</td>
+            <td>904</td>
+            <td>00:59</td>
+        </tr>
+        <tr>
+            <td>Internet Explorer</td>
+            <td>366</td>
+            <td>2.63%</td>
+            <td>333</td>
+            <td>01:01</td>
+        </tr>
+        <tr>
+            <td>Safari (in-app)</td>
+            <td>162</td>
+            <td>1.17%</td>
+            <td>112</td>
+            <td>00:58</td>
+        </tr>
+        <tr>
+            <td>Opera</td>
+            <td>103</td>
+            <td>0.74%</td>
+            <td>87</td>
+            <td>01:22</td>
+        </tr>
+        <tr>
+            <td>Edge</td>
+            <td>98</td>
+            <td>0.71%</td>
+            <td>69</td>
+            <td>01:18</td>
+        </tr>
+        <tr>
+            <td>Other</td>
+            <td>275</td>
+            <td>6.02%</td>
+            <td>90</td>
+            <td>N/A</td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
